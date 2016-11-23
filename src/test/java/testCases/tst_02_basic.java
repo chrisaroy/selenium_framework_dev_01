@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.AfterClass;
 import appStoreDemo.store_demo_site;
-import config.Properties;
 import utilities.Confirm;
 import utilities.Support;
 import utilities.TestLog;
@@ -17,31 +16,26 @@ import java.util.concurrent.TimeUnit;
 public class tst_02_basic {
 	
 	private static WebDriver driver = null;
-	static{
-		// Set up for logging
-		String full_class_name = MethodHandles.lookup().lookupClass().getName();
-		String test_name = full_class_name.substring(full_class_name.lastIndexOf('.')+1);
-		System.setProperty("log4j.configurationFile", "src\\config\\log4j2.xml");	
-		Properties.test_name = test_name;
-		System.setProperty("test_name", test_name);
-	}	
 	
 	@BeforeClass
 	public void beforeClass() {
+		String full_class_name = MethodHandles.lookup().lookupClass().getName();
+		Support.setupLogging(full_class_name.substring(full_class_name.lastIndexOf('.')+1));
+		
 		TestLog.startTest();
-		String gecko_driver_path = "C:\\Program Files\\geckodriver_0_11\\geckodriver.exe";
-		System.setProperty("webdriver.gecko.driver", gecko_driver_path);
+		Support.lauchGeckoDriver();
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		TestLog.info("Log on to website");
-		String website = "http://www.store.demoqa.com";
-		driver.get(website);
 	}	
 	
 	@Test(priority=1)
 	public void test_case_home_page() throws InterruptedException {
 		TestLog.startTestStep();
+		
+		TestLog.info("Log on to website");
+		String website = "http://www.store.demoqa.com";
+		driver.get(website);
+		
 		store_demo_site store_site = new store_demo_site();
 		
 		TestLog.info("At Home page.");

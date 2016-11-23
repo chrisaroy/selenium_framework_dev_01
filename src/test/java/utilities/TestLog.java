@@ -23,6 +23,7 @@ public class TestLog {
 		TestLog.info("***********************************************************");	
 		Reporter.log("End Test: " + Properties.test_name);
 		
+		// Prints off the test summary.
 		testSummary();
 	}
 	
@@ -80,4 +81,5 @@ public class TestLog {
 		//TestLog.info("  Number that were asserts: " + Properties.number_asserts);
 		TestLog.info("***********************************************************");
 	}
+	
 }

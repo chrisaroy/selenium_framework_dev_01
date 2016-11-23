@@ -3,7 +3,6 @@
 <Configuration status="INFO">
 	<Properties>
 		<Property name="base-path">src\\testResults\\</Property>
-		<Property name="test-name">tst_00_fun</Property>
 	</Properties>
 	<Appenders>
 		<!-- Output to console -->
